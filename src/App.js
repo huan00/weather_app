@@ -6,7 +6,7 @@ import { getWeather } from './utils/Services'
 import Today from './components/Today'
 
 function App() {
-  const [weather, setWeather] = useState({})
+  const [weather, setWeather] = useState()
   const days = 10
   const [location, setLocation] = useState()
 
@@ -34,12 +34,10 @@ function App() {
     }
   }
 
-  console.log(location)
+  // console.log(location)
 
   return (
-    <div className="App">
-      <Today weather={weather} />
-    </div>
+    <div className="App">{weather ? <Today weather={weather} /> : <></>}</div>
   )
 }
 

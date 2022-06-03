@@ -1,56 +1,59 @@
 import React from 'react'
 
-const WeatherDetail = ({ title, condition, sunrise, sunset }) => {
+const WeatherDetail = ({ weather }) => {
   return (
     <div className="weatherDay">
       <div className="weatherDay-location weather-headline">
-        {title}Weather Today in Austin, Tx
+        Weather Today in {weather.location.name}, {weather.location.region}
       </div>
       <div className="weatherDay-overview">
         <div className="weatherDay-temp">
-          <p>90°</p>
-          <p className="weatherDay-condition">{condition}Feels Like</p>
+          <p>{weather.current.feelslike_f}°</p>
+          <p className="weatherDay-condition">Feels Like</p>
         </div>
         <div className="weatherDay-sun">
-          <p>{sunrise}6:29am</p>
-          <p>{sunset}8:28pm</p>
+          <p>{weather.forecast.forecastday[0].astro.sunrise}</p>
+          <p>{weather.forecast.forecastday[0].astro.sunset}</p>
         </div>
       </div>
       <div className="weatherDay-detail">
         <div className="weatherDay-detail-overview">
           <div>
             <div>High/Low</div>
-            <div>--/74°</div>
+            <div>
+              {weather.forecast.forecastday[0].day.mintemp_f}°/
+              {weather.forecast.forecastday[0].day.maxtemp_f}°
+            </div>
           </div>
           <div>
             <div>Humidity</div>
-            <div>58%</div>
+            <div>{weather.current.humidity}%</div>
           </div>
           <div>
             <div>Pressure</div>
-            <div>29.83 in</div>
+            <div>{weather.current.pressure_in} in</div>
           </div>
           <div>
             <div>Visibility</div>
-            <div>10 mi</div>
+            <div>{weather.current.vis_miles} mi</div>
           </div>
         </div>
         <div className="weatherDay-detail-overview">
           <div>
-            <div>Wind</div>
-            <div>9 mph</div>
+            <div>Avg Temp</div>
+            <div>{weather.forecast.forecastday[0].day.avgtemp_f}°</div>
           </div>
           <div>
-            <div>Dew Point</div>
-            <div>69°</div>
+            <div>Wind</div>
+            <div>{weather.current.wind_mph} mph</div>
           </div>
           <div>
             <div>UV Index</div>
-            <div>0 of 10</div>
+            <div>{weather.forecast.forecastday[0].day.uv} of 10</div>
           </div>
           <div>
             <div>Moon Phase</div>
-            <div>Waxing Crescent</div>
+            <div>{weather.forecast.forecastday[0].astro.moon_phase}</div>
           </div>
         </div>
       </div>

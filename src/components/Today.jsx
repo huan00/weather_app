@@ -80,7 +80,7 @@ const Today = ({ weather }) => {
         </div>
       </div>
       <div className="day-detail">
-        <WeatherDetail />
+        <WeatherDetail weather={weather} />
       </div>
     </div>
   )
