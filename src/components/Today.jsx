@@ -1,58 +1,38 @@
 import React, { useEffect, useState } from 'react'
-import { getWeather } from '../utils/Services'
+
 import Card from './Card'
-import '../styles/styles.css'
 import WeatherDetail from './WeatherDetail'
 
-const Today = ({}) => {
-  const title = "Today's Forecast for Austin, City"
-  const time = 'current'
-  const [weather, setWeather] = useState({})
-  const [location, setLocation] = useState('')
+import '../styles/styles.css'
 
-  useEffect(() => {
-    getLocation()
-    getTodayWeather()
-  }, [location])
+const Today = ({ weather }) => {
+  const title = `Today's Forecast for ${weather.location.name}, ${weather.location.region}`
 
-  const getTodayWeather = async () => {
-    if (location) {
-      // setWeather(await getWeather(location.lat, location.lon, time))
-      console.log('hello')
-    }
-  }
-
-  const getLocation = () => {
-    if (!location) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        setLocation({
-          lat: position.coords.latitude,
-          lon: position.coords.longitude
-        })
-      })
-    }
-  }
-  console.log(location)
+  console.log(weather)
 
   return (
     <div>
       <div className="weather-detail">
         <p className="weather-heading">
-          <span className="weather-city">Austin, Tx: </span>
-          <span> As of 8:29pm</span>
+          <span className="weather-city">
+            {weather.location.name}, {weather.location.region}
+          </span>
+          <span> - As of 8:29pm</span>
         </p>
         <div className="weather-detail-content">
           <div className="weather-forecast">
-            <p className="weather-forecast-temp">85°</p>
-            <p className="weather-forecast-condition">Clear</p>
+            <p className="weather-forecast-temp">{weather.current.temp_f}°</p>
+            <p className="weather-forecast-condition">
+              {weather.current.condition.text}
+            </p>
             <div className="weather-forecast-dn">
-              <p>Day 94</p>
-              <p>Night 74</p>
+              <p>Low: {weather.forecast.forecastday[0].day.mintemp_f}°</p>
+              <p>High: {weather.forecast.forecastday[0].day.maxtemp_f}°</p>
             </div>
           </div>
           <img
             className="weather-icon"
-            src="http://openweathermap.org/img/w/10d.png"
+            src={weather.current.condition.icon}
             alt="weatherIcon"
           />
         </div>

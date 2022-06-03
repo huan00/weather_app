@@ -111,10 +111,14 @@ body {
 }
 
 .weather-forecast-dn {
-  width: 200px;
+  width: fit-content;
 
   display: flex;
   justify-content: space-between;
+}
+
+.weather-forecast-dn > p {
+  margin: 0 10px 0 0;
 }
 
 .weather-heading {
