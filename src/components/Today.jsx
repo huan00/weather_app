@@ -7,6 +7,7 @@ import '../styles/styles.css'
 
 const Today = ({ weather }) => {
   const title = `Today's Forecast for ${weather.location.name}, ${weather.location.region}`
+  const timeOfDay = { morning: 6, noon: 12, evening: 18, overnight: 0 }
 
   console.log(weather)
 
@@ -40,13 +41,42 @@ const Today = ({ weather }) => {
       <div className="day-forecast">
         <div className="day-forecast-overview">{title}</div>
         <div className="day-forecast-card">
-          <Card />
-          <hr></hr>
-          <Card />
-          <hr></hr>
-          <Card />
-          <hr></hr>
-          <Card />
+          <Card
+            timeOfDay="Morning"
+            degree={weather.forecast.forecastday[0].hour[6].temp_f}
+            icon={weather.forecast.forecastday[0].hour[6].condition.icon}
+            precipitation={
+              weather.forecast.forecastday[0].hour[6].chance_of_rain
+            }
+            precipIcon="//cdn.weatherapi.com/weather/64x64/day/308.png"
+          />
+          <Card
+            timeOfDay="Noon"
+            degree={weather.forecast.forecastday[0].hour[12].temp_f}
+            icon={weather.forecast.forecastday[0].hour[12].condition.icon}
+            precipitation={
+              weather.forecast.forecastday[0].hour[12].chance_of_rain
+            }
+            precipIcon="//cdn.weatherapi.com/weather/64x64/day/308.png"
+          />
+          <Card
+            timeOfDay="Evening"
+            degree={weather.forecast.forecastday[0].hour[18].temp_f}
+            icon={weather.forecast.forecastday[0].hour[18].condition.icon}
+            precipitation={
+              weather.forecast.forecastday[0].hour[18].chance_of_rain
+            }
+            precipIcon="//cdn.weatherapi.com/weather/64x64/day/308.png"
+          />
+          <Card
+            timeOfDay="Overnight"
+            degree={weather.forecast.forecastday[0].hour[0].temp_f}
+            icon={weather.forecast.forecastday[0].hour[0].condition.icon}
+            precipitation={
+              weather.forecast.forecastday[0].hour[0].chance_of_rain
+            }
+            precipIcon="//cdn.weatherapi.com/weather/64x64/day/308.png"
+          />
         </div>
       </div>
       <div className="day-detail">
